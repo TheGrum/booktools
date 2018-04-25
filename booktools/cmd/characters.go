@@ -23,7 +23,7 @@ import (
 // charactersCmd represents the characters command
 var charactersCmd = &cobra.Command{
 	Use:   "characters",
-	Short: "lists the characters in the book",
+	Short: "Lists the characters in the book",
 	Long:  `Lists the characters in the book.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		bt.SortAndPrintLines(bt.IdentifyCharacters(processRoot, 3, 1))
