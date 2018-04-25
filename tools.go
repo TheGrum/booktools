@@ -1,12 +1,22 @@
+// Copyright © 2018 Howard C. Shaw III <howardcshaw@gmail.com>
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package booktools
 
 import (
 	"fmt"
 	"sort"
-
-	"github.com/jdkato/prose/chunk"
-	"github.com/jdkato/prose/tag"
-	"github.com/jdkato/prose/tokenize"
 )
 
 func PrintLines(ss []string) {
@@ -40,39 +50,5 @@ func PrintNameFrequency(nf map[string]int) {
 	})
 	for _, k := range names {
 		fmt.Printf("%v: %-10d\n", k, nf[k])
-	}
-}
-
-func GetNamesViaProse(s string) []string {
-	words := tokenize.TextToWords(s)
-	regex := chunk.TreebankNamedEntities
-
-	tagger := tag.NewPerceptronTagger()
-	prosenames := make(map[string]int)
-	for _, entity := range chunk.Chunk(tagger.Tag(words), regex) {
-		prosenames[entity] = 1
-	}
-	names := make([]string, 0, len(prosenames))
-	for k, _ := range prosenames {
-		names = append(names, k)
-	}
-	return names
-}
-
-func GetNameFrequencyViaProse(s string) map[string]int {
-	words := tokenize.TextToWords(s)
-	regex := chunk.TreebankNamedEntities
-
-	tagger := tag.NewPerceptronTagger()
-	prosenames := make(map[string]int)
-	for _, entity := range chunk.Chunk(tagger.Tag(words), regex) {
-		prosenames[entity] = prosenames[entity] + 1
-	}
-	return prosenames
-}
-
-func NameFrequencyMapMerge(a map[string]int, b map[string]int) {
-	for k, v := range b {
-		a[k] = a[k] + v
 	}
 }
