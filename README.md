@@ -46,3 +46,5 @@ navigate to http://localhost:8080/
 
 
 ```
+
+![Example of character matches](http://drive.google.com/uc?id=1ZamoAaztjehdJF5uv2YPkgTD4_Eqyd4I)
